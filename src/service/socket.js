@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
 const SocketMessage = require('../model/SocketMessage');
 let webSocketServer;
+let tankList = [];
+let bulletList = []
 const wsService = {
 	start() {
 		if (!webSocketServer) {
@@ -25,15 +27,19 @@ const wsService = {
 	handleMessage(message, ws) {
 		socketMessage = SocketMessage.getInstance(message);
 		const handler = this.handler[socketMessage.event];
-		// if (handler) {
-		// 	handler(socketMessage, ws)
-		// } else {
-		// 	console.error('unkonw socketMessage event ', socketMessage)
-		// }
+		if (handler) {
+			handler(socketMessage, ws)
+		} else {
+			console.error('unkonw socketMessage event ', socketMessage)
+		}
 	},
 	handler: {
-		test(message, ws) {
-			ws.send('hello, you send me ' + message.content)
+		// test(message, ws) {
+		// 	ws.send('hello, you send me ' + message.content)
+		// },
+		updateTank(message,ws){
+			message && console.log(message.content)
+
 		}
 	},
 
