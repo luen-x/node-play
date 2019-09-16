@@ -1,5 +1,4 @@
 const WebSocket = require('ws');
-const SocketMessage = require('../model/SocketMessage');
 let webSocketServer;
 let tankList = [];
 let bulletList = []
@@ -10,9 +9,9 @@ const wsService = {
 			webSocketServer.on('connection', (ws) => {
 				ws.on('message', (message) => {
 					console.log('received: %s', message);
-					// this.handleMessage(message, ws)
+					this.handleMessage(message, ws)
 				});
-				ws.send('connect success');
+				ws.send(JSON.stringify({event:'connect',msg:'success'}));
 			});
 
 		}
@@ -25,12 +24,11 @@ const wsService = {
 		this.handler = { ...this.handler, ...handler }
 	},
 	handleMessage(message, ws) {
-		socketMessage = SocketMessage.getInstance(message);
-		const handler = this.handler[socketMessage.event];
+		const handler = this.handler[message.event];
 		if (handler) {
-			handler(socketMessage, ws)
+			handler(message, ws)
 		} else {
-			console.error('unkonw socketMessage event ', socketMessage)
+			console.error('unkonw message event ', message)
 		}
 	},
 	handler: {
@@ -38,7 +36,7 @@ const wsService = {
 		// 	ws.send('hello, you send me ' + message.content)
 		// },
 		updateTank(message,ws){
-			message && console.log(message.content)
+			message && console.log(message)
 
 		}
 	},
