@@ -4,7 +4,7 @@ module.exports =  class Hello extends BaseController {
 		super({path:'/hello',method:'get'})
 	}
 	handler(ctx,next){
-		ctx.body = 'hello luen'
+		ctx.body = {status:1,msg:'hello luen'} 
 	}
 
 }
