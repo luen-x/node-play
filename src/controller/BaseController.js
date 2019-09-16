@@ -1,4 +1,4 @@
-export default class BaseController {
+module.exports = class BaseController {
 	constructor (option) {
 		this.method=option.method || 'get';
 		this.path = option.path
