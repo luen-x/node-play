@@ -5,17 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/main.js",
-    "watch": "node ./watch.js"
+    "main": "node ./src/main.js",
+    "watch": "node ./watch.js",
+    "start": "supervisor ./src/main.js",
+    "hot": "hotnode ./src/main.js",
+    "test-db": "node ./src/dataBase/test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async-validator": "^3.2.3",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "lodash": "^4.17.15",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.3",
     "ws": "^7.1.2"
+  },
+  "devDependencies": {
+    "hotnode": "0.0.8",
+    "supervisor": "^0.12.0"
   }
 }

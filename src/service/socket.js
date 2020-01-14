@@ -25,6 +25,7 @@ const wsService = {
 	},
 	handleMessage(message, ws) {
 		const handler = this.handler[message.event];
+		console.log(this.handler)
 		if (handler) {
 			handler(message, ws)
 		} else {

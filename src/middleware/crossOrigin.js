@@ -10,6 +10,8 @@ module.exports = async function(ctx, next) {
     );
     ctx.set("Access-Control-Allow-Credentials", "true");
     ctx.set("Access-Control-Expose-Headers", "token, -token");
-   // res.header("Content-Type", "application/json");
-    await next();
+   // res.header("Content-Type", "application/json");    
+    // if(ctx.method == "OPTIONS") return;
+
+    await next();  
 };
