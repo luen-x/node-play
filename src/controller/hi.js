@@ -5,7 +5,7 @@ module.exports = [
 	new Constroller({
 		path: '/hi',
 		method: 'get',
-		rules:{account:[{required:true,message:'请填写账号'}]},
+		// rules:{account:[{required:true,message:'请填写账号'}]},
 		handler: async (ctx, next) => {
 			ctx.body = { msg: 'hello~', status: 1 }
 

@@ -1,3 +1,4 @@
+// 已使用sequelize替代
 const mysql = require("mysql2/promise");
 const defaultConfig = require("./config");
 const pool=mysql.createPool({
