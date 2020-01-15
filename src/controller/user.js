@@ -1,10 +1,9 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const userService = require('../service/user/user')
-const Constroller = require('./BaseController');
 const basePath = '/user';
 module.exports = [
-	new Constroller({
+	{
 		path: basePath + "/login",
 		method: 'post',
 		rules: {
@@ -13,7 +12,6 @@ module.exports = [
 			password: [{ required: true, message: '请填写密码' }],
 		},
 		async handler(ctx, next) {
-
 			const { account, password } = ctx.request.body;
 			const exist = await userService.getUserByAccount(account);
 			if (!exist) {
@@ -34,8 +32,8 @@ module.exports = [
 				ctx.body = { status: 1, msg: "登录成功，你好" + exist.userName + "!", data: { user: exist } };
 			}
 		}
-	}),
-	new Constroller({
+	},
+	{
 		path: basePath + '/register',
 		method: 'post',
 		rules: {
@@ -55,9 +53,7 @@ module.exports = [
 				} else {
 					ctx.body = { status: 0, msg: "注册失败！" };
 				}
-
 			}
-
 		}
-	})
+	}
 ]

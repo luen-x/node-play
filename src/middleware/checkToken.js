@@ -40,15 +40,12 @@ module.exports = async function(ctx, next) {
 					}
 				}
 			});
-
 		}).catch(e=>{console.error(e);return {msg:'token验证异常',msg:0}})
 		if (result && result.status==1){
 			await next()
 		}else {
 			ctx.body = result;
 		}
-
-       
     } else {
 		ctx.body ={ msg: "请先登录",status:0 }
         // res.json({ msg: "请先登录" });

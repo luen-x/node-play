@@ -1,5 +1,6 @@
 const Validator = require('async-validator').default;
 // console.log(Validator)
+// 这里的控制器实例会一只存在，option里的数据必须是只读
 class Controller {
 	constructor({ path, method = 'get', handler, rules,option={} }) {
 		this.path = path;
@@ -10,7 +11,6 @@ class Controller {
 			this.validator = new Validator(rules);
 		}
 		this.option = option;
-
 	}
 	async validate(ctx, next) {
 		if (this.validator) {
