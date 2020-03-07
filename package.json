@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "main": "node ./src/main.js",
     "watch": "node ./watch.js",
     "start": "supervisor ./src/main.js",
     "hot": "hotnode ./src/main.js",
-    "test-db": "node ./src/dataBase/test.js"
+    "test": "node ./src/dataBase/test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async-lock": "^1.2.2",
     "async-validator": "^3.2.3",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
@@ -26,6 +26,7 @@
     "ws": "^7.1.2"
   },
   "devDependencies": {
+    "assemblyscript": "^0.8.1",
     "hotnode": "0.0.8",
     "supervisor": "^0.12.0"
   }

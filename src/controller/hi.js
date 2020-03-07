@@ -1,3 +1,5 @@
+const sequelize = require('../dataBase/sequelize')
+const Sequelize = require('sequelize')
 module.exports = [
 	{
 		path: '/hi',
@@ -15,5 +17,17 @@ module.exports = [
 			ctx.body = { msg: 'hello~ ' + ctx.$user.userName, status: 1 }
 
 		},
-	}
+	},
+	{
+		path: '/query',
+		method: 'post',
+		handler: async (ctx, next) => {
+			Sequelize.q
+			
+			ctx.body = { msg: 'hello~ ' + ctx.$user.userName, status: 1 }
+
+		},
+	},
+
+
 ]

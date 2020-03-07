@@ -1,4 +1,6 @@
 const User = require('./models/user');
+const Message = require('./models/message');
+const Case = require('./models/case');
 const Sequelize = require('sequelize')
 const sequelize = require('./sequelize')
 
@@ -97,23 +99,119 @@ const sequelize = require('./sequelize')
 // 	})
 // })
 // 事务 同步写法 // 如果只有抛出异常才能回滚事务，因此不要在事务中抓取异常，或者抓取到异常后处理完业务需要把异常继续抛出
-sequelize.transaction(async t => {
-	const tran = { transaction: t };
-	await User.create({
-		account: 'ZZZ',
-		userName: 'ZZZ',
-		password: 'ZZZ'
-	}, tran)
-	await User.create({
-		account: 'ZZZ2',
-		userName: 'ZZZ2',
-		password: 'ZZZ2'
-	}, tran).then(() => { throw new Error('xxx') }).catch(err=>{
-		// 处理业务 。。。
-		console.log('继续抛出异常')
-		throw err;
+// sequelize.transaction(async t => {
+// 	const tran = { transaction: t };
+// 	await User.create({
+// 		account: 'ZZZ',
+// 		userName: 'ZZZ',
+// 		password: 'ZZZ'
+// 	}, tran)
+// 	await User.create({
+// 		account: 'ZZZ2',
+// 		userName: 'ZZZ2',
+// 		password: 'ZZZ2'
+// 	}, tran).then(() => { throw new Error('xxx') }).catch(err => {
+// 		// 处理业务 。。。
+// 		console.log('继续抛出异常')
+// 		throw err;
+// 	})
+// })
+
+// 多表查询
+
+// Message.create({
+// 	fromId:17,
+// 	toId:18,
+// 	content:'你好18号，我是17号'
+// })
+// Message.create({
+// 	fromId:18,
+// 	toId:17,
+// 	content:'你好17号，我是18号,666'
+// })
+// 如果有多个外键指向一个表，在建立关联关系时需要指定外键名和as，在做关联查询时指定对应的as来进行子查询
+// Message.belongsTo(User,{foreignKey:'fromId',as:"fromUser"})
+// Message.belongsTo(User,{foreignKey:'toId',as:"toUser"})
+// Message.findAll({
+// 	attributes: ['id', 'content', 'createdAt'],
+// 	where: {
+// 		[Op.or]: [{ fromId: 17, toId: 18 }, { fromId: 18, toId: 17 }],
+// 	},
+// 	include: [
+// 		{ model: User, required: true, as: 'fromUser', attributes: ['id', 'userName', 'account'] },
+// 		{ model: User, required: true, as: 'toUser', attributes: ['id', 'userName', 'account'] },
+// 		// {model: User, required: true,as:'toUser',foreignKey:'toId' }
+
+
+// 	]
+// }).then(ms => ms.map(m => {
+// 	const msg = m.get();
+// 	msg.fromUser = msg.fromUser.get();
+// 	msg.toUser = msg.toUser.get();
+// 	return msg
+// })).then(console.log)
+
+// 批处理
+// const arr=[];
+// for(let i=0;i<100000;i++){
+// 	arr.push({industryId:parseInt( Math.random()*10), 'productTypeId':parseInt( Math.random()*10),'customerTypeId':parseInt( Math.random()*10),'province':parseInt( Math.random()*10),content:"陆小胖爱庄苗条，庄苗条爱陆小胖！"})
+// }
+// console.log(arr)
+// Case.bulkCreate(arr)
+
+const customer = { industryId: 3, productTypeId: 5, customerTypeId: 5, province: 5 }
+const keys = ['industryId', 'productTypeId', 'customerTypeId', 'province','aa'];
+const t1= (new Date()).getTime()
+Case.findAll({
+	attributes: ['id', 'industryId', 'productTypeId', 'customerTypeId', 'province'],
+	where: {
+		[Op.or]: [
+			{ industryId: customer.industryId }, 
+			{ productTypeId: customer.productTypeId }, 
+			{ customerTypeId: customer.customerTypeId }, 
+			{ province: customer.province }
+		],
+	},
+}).then(list => {
+	const sortList = list.map(i => i.get())
+	.sort((i, j) => {
+		let lengthi = 0;
+		let lengthj = 0;
+		keys.forEach(key => {
+			if (i[key] === customer[key]) {
+				lengthi++;
+
+			}
+			if (j[key] === customer[key]) {
+				lengthj++;
+			}
+
+		})
+		i.lengthi = lengthi;
+		return lengthj - lengthi
 	})
+	console.log(sortList.length)
+	const t3= (new Date()).getTime()
+		console.log(t3-t1)
+	
+	sortList.length = 10;
+	// console.log(sortList)
+	Case.findAll({
+		where: {
+			id: {
+				[Op.in]: sortList.map(i => i.id)
+			}
+		}
+	}).then(list=>{
+		console.log(list.map(i=>i.get()))
+		const t2= (new Date()).getTime()
+		console.log(t2-t1)
+
+	})
+	
+
 })
+
 
 
 

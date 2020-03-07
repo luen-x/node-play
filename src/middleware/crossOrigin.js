@@ -13,5 +13,5 @@ module.exports = async function(ctx, next) {
    // res.header("Content-Type", "application/json");    
     // if(ctx.method == "OPTIONS") return;
 
-    await next();  
+    await next();
 };

@@ -22,9 +22,12 @@ module.exports = async function(ctx, next) {
 						// 大于一半的过期时间，刷新token
 						const token = jwt.sign(
 							{
+								id:payload.id,
 								account: payload.account,
-								user_name:payload.user_name,
-								exptime: now + loginConfig.exptime
+								userName:payload.userName,
+								id:payload.id,
+								exptime: now + loginConfig.exptime,
+
 							},
 							"lawrence",
 							{}

@@ -1,4 +1,4 @@
-const User = require('../../dataBase/models/user')
+const User = require('../../dataBase/models/user');
 /***
  * service主要用来封装会公用的，复杂的，独立的，低耦合的服务，主要被控制层调用，
  * 
@@ -33,7 +33,11 @@ const service = {
 				id
 			}
 		})
+	},
+	getAllUser(){
+		return User.findAll({attributes:['id','account','userName']}).then(res=>res.map(re=>re.get()))
 	}
+
 
 }
 module.exports = service;

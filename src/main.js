@@ -4,7 +4,7 @@ const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser');
 const crossOrigin = require('./middleware/crossOrigin');
 const catchException = require('./middleware/catchException');
-const wsService = require('./service/socket');
+const wsService = require('./service/notice/socket');
 const controllers = require('./controller/root');
 const checkToken = require('./middleware/checkToken')
 // console.log(controllers)
@@ -26,5 +26,5 @@ app.listen(3000, err => {
     if (err) throw err;
     console.log('http://localhost:3000/index.html');
 });
-wsService.start();
+wsService.start(); 
 
