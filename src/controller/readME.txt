@@ -1,0 +1,3 @@
+controller目录名不可更改，项目启动后会递归该目录下的所有文件，如果文件名以Controller结尾就会被挂载为路由
+
+controller文件必须导出一个{controller:[],bathPath:''}对象，对象的controller数组中的每个对象都会作为BaseController的构造参数去创建一个Controller实例

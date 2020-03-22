@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const config = require('./config');
+const Sequelize = require("sequelize");
+const config = require("./config"); 
 global.Op = Sequelize.Op;
 // const Op = Sequelize.Op;
 // const operatorsAliases = {
@@ -41,18 +41,18 @@ global.Op = Sequelize.Op;
 
 var sequelize = new Sequelize(config.database, config.user, config.password, {
 	host: config.host,
-	dialect: 'mysql',
+	dialect: "mysql",
 	pool: {
-		max: 5,
+		max: 5, 
 		min: 0,
-		idle: 30000
+		idle: 30000,
 	},
 	define: {
 		// The `timestamps` field specify whether or not the `createdAt` and `updatedAt` fields will be created.
 		// This was true by default, but now is false by default
 		timestamps: false,
 	},
-})
+});
 
-global.$seq = sequelize;  // 存储全局sequelize实例
-module.exports = sequelize
+global.$seq = sequelize; // 存储全局sequelize实例
+module.exports = sequelize;

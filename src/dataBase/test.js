@@ -1,8 +1,9 @@
 const User = require('./models/user');
 const Message = require('./models/message');
 const Case = require('./models/case');
-const Sequelize = require('sequelize')
-const sequelize = require('./sequelize')
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const sequelize = require('./sequelize');
 
 // 新增
 // User.create({
@@ -80,7 +81,6 @@ const sequelize = require('./sequelize')
 // 	}
 // }).then(console.log)
 
-
 // 事务 官方文档写法
 // sequelize.transaction(t => {
 // 	return User.create({
@@ -142,7 +142,6 @@ const sequelize = require('./sequelize')
 // 		{ model: User, required: true, as: 'toUser', attributes: ['id', 'userName', 'account'] },
 // 		// {model: User, required: true,as:'toUser',foreignKey:'toId' }
 
-
 // 	]
 // }).then(ms => ms.map(m => {
 // 	const msg = m.get();
@@ -159,9 +158,9 @@ const sequelize = require('./sequelize')
 // console.log(arr)
 // Case.bulkCreate(arr)
 
-const customer = { industryId: 3, productTypeId: 5, customerTypeId: 5, province: 5 }
-const keys = ['industryId', 'productTypeId', 'customerTypeId', 'province','aa'];
-const t1= (new Date()).getTime()
+const customer = { industryId: 3, productTypeId: 5, customerTypeId: 5, province: 5 };
+const keys = ['industryId', 'productTypeId', 'customerTypeId', 'province', 'aa'];
+const t1= (new Date()).getTime();
 Case.findAll({
 	attributes: ['id', 'industryId', 'productTypeId', 'customerTypeId', 'province'],
 	where: {
@@ -174,25 +173,25 @@ Case.findAll({
 	},
 }).then(list => {
 	const sortList = list.map(i => i.get())
-	.sort((i, j) => {
-		let lengthi = 0;
-		let lengthj = 0;
-		keys.forEach(key => {
-			if (i[key] === customer[key]) {
-				lengthi++;
+		.sort((i, j) => {
+			let lengthi = 0;
+			let lengthj = 0;
+			keys.forEach(key => {
+				if (i[key] === customer[key]) {
+					lengthi++;
 
-			}
-			if (j[key] === customer[key]) {
-				lengthj++;
-			}
+				}
+				if (j[key] === customer[key]) {
+					lengthj++;
+				}
 
-		})
-		i.lengthi = lengthi;
-		return lengthj - lengthi
-	})
-	console.log(sortList.length)
-	const t3= (new Date()).getTime()
-		console.log(t3-t1)
+			});
+			i.lengthi = lengthi;
+			return lengthj - lengthi;
+		});
+	console.log(sortList.length);
+	const t3= (new Date()).getTime();
+	console.log(t3-t1);
 	
 	sortList.length = 10;
 	// console.log(sortList)
@@ -203,21 +202,11 @@ Case.findAll({
 			}
 		}
 	}).then(list=>{
-		console.log(list.map(i=>i.get()))
-		const t2= (new Date()).getTime()
-		console.log(t2-t1)
+		console.log(list.map(i=>i.get()));
+		const t2= (new Date()).getTime();
+		console.log(t2-t1);
 
-	})
-	
+	});
 
-})
-
-
-
-
-
-
-
-
-
+});
 
