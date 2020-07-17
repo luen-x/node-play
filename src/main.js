@@ -22,7 +22,7 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.use(require('koa-static')('./static'));
 
-app.listen(3000, err => {
+app.listen(80, err => {
 	if (err) { throw err; }
     
 	console.log('http://localhost:3000/index.html');
