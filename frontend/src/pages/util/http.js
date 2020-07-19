@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { API } from '../constants/api';
-import { TOKEN_KEY } from '../constants/constants';
-import { Storage } from './util';
+import { TOKEN_KEY, USER_KEY } from '../constants/constants';
+import { Storage, cleanUser } from './util';
+import global from '../global/global';
 
 const httpConfig = {
 	baseURL: window.location.origin + '/api',
@@ -51,6 +52,20 @@ const httpConfig = {
 		// }
 	],
 	responseInterceptors: [
+		function checkToken(response){
+			if (response.data.status === -1){
+				// window.app.$message.error('登录超时，请重新登录');
+				cleanUser();
+				// window.app.$global.
+				window.app.$router.push('/login');
+
+			} else if (response.headers.token){
+				Storage.set(TOKEN_KEY, response.headers.token);
+				global.token = response.headers.token;
+			}
+			return response;
+
+		},
 		function tip(response) {
 			if (response.data.status === 1 && response.config.tipSuccess) {
 				window.app.$message.success(response.data.msg);
@@ -60,7 +75,8 @@ const httpConfig = {
 			return response;
 		},
 		function cleanData(response) {
-			const result = response.config.rowData ? response : response.data;
+			console.log(response, response.config.rawData );
+			const result = response.config.rawData ? response : response.data;
 			if (response.data && response.data.status === 1) {
 				return result;
 			} throw result;
@@ -99,7 +115,7 @@ const createHttpPlugin = () => {
 };
 export default createHttpPlugin();
 
-// config中增加关键字rowData，为true则会返回所有的响应信息，默认false
+// config中增加关键字rawData，为true则会返回所有的响应信息，默认false
 // post请求默认情况下会自动toast提示请求返回的msg，可以通过tipSuccse=false关闭
 // get请求默认不会提示msg，可用tipSuccess=true开启
 // 请求如果失败了（success是false）默认自动会toast提示msg，可通过tipError=false关闭
@@ -107,7 +123,7 @@ export default createHttpPlugin();
 // example:
 /**
  * this.$get("API_USER_NAME",{id:123}).then()
- * this.$get("API_USER_NAME",{id:123},{tipError:false,tipSuccess:false,rowData:true}).then()
+ * this.$get("API_USER_NAME",{id:123},{tipError:false,tipSuccess:false,rawData:true}).then()
  * 
  * axios 完整配置 http://www.axios-js.com/zh-cn/docs/#%E8%AF%B7%E6%B1%82%E9%85%8D%E7%BD%AE
  * 

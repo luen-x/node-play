@@ -22,6 +22,7 @@
 
 <script>
 import { Storage } from '@util/util';
+import { USER_KEY } from '@constants/constants';
 export default {
 	name: "login",
 	data(){
@@ -40,13 +41,17 @@ export default {
 			this.$refs.form.validate().then(() => {
 				this.$post('USER_LOGIN', {
 					...this.formData
-				}).then((res) => {
-					this.$global.user = res.data;
-					Storage.set('user', res.data);
+				},).then((res) => {
+					console.log(res);
+					// Storage.set(TOKEN_KEY, res.headers.token);
+					Storage.set(USER_KEY, res.data.user);
+					this.$global.user = res.data.user;
+					// this.$global.token = res.headers.token;
+					// Storage.set('user', res.data);
 
 					this.$router.push('/appList/main');
 				});
-			});
+			}); 
 
 		},
 		handleRegister(){

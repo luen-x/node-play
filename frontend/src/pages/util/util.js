@@ -1,6 +1,8 @@
 export * from '@lawrence666/le-util';
-import { RegEx } from '@lawrence666/le-util';
+import { RegEx, Storage } from '@lawrence666/le-util';
 import dayjs from 'dayjs';
+import { USER_KEY, TOKEN_KEY } from '../constants/constants';
+import global from '../global/global';
 
 RegEx.set({
 	telOrMobile: {
@@ -29,5 +31,14 @@ export const setData = (to, from) => {
 };
 export const formatTime = (time, format = 'YYYY-MM-DD HH:mm:ss') => {
 	return (time && dayjs(time).format(format)) || '';
+};
+
+export const cleanUser = () => {
+	Storage.remove(TOKEN_KEY);
+	Storage.remove(USER_KEY);
+	global.user = {};
+	global.token = '';
+	global.auth = {};
+	global.config = {};
 };
 

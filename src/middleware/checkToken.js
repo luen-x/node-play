@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const tokenConfig = {
 	exptime: 3600000,
-	unchekPaths: ["/user/login", "/user/register"],
+	unchekPaths: ["/api/user/login", "/api/user/register"],
 	unchekRegex: undefined,
 };
 module.exports = async function(ctx, next) {

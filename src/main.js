@@ -14,7 +14,7 @@ const app = new Koa();
 
 app.use(crossOrigin);
 app.use(catchException);
-// app.use(checkToken);
+app.use(checkToken);
 app.use(bodyParser());
 controllers.forEach(con=>{
 	router[con.method](con.path, con.validate.bind(con), con.handler.bind(con));
