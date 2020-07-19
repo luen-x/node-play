@@ -2,12 +2,11 @@ const jwt = require("jsonwebtoken");
 const tokenConfig = {
 	exptime: 3600000,
 	unchekPaths: ["/api/user/login", "/api/user/register"],
-	unchekRegex: undefined,
+	unchekRegex: '',
 };
 module.exports = async function(ctx, next) {
 	if (ctx.method =="OPTIONS") return ctx.body='';
-
-	if (tokenConfig.unchekPaths.includes(ctx.path) || (tokenConfig.unchekRegex && tokenConfig.unchekRegex.test(ctx.path))) {
+	if (!ctx.path.startsWith('/api') || tokenConfig.unchekPaths.includes(ctx.path) || (tokenConfig.unchekRegex && tokenConfig.unchekRegex.test(ctx.path))) {
 		await next();
 	} else if (ctx.header.token) {
 		const now = Date.now();
