@@ -7,8 +7,8 @@
     "@lawrence666/le-util": "^1.0.4",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "dayjs": "^1.8.29",
     "element-ui": "^2.13.2",
-    "moment": "^2.26.0",
     "vue": "^2.6.11",
     "vue-router": "^3.3.2",
     "vuex": "^3.4.0"

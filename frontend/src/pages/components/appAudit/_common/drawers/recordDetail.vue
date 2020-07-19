@@ -40,7 +40,6 @@
 
 <script>
 import { Portal } from '@common/portal/portal';
-import moment from 'moment';
 import { debounce, cloneDeep } from 'lodash';
 import { RegEx, setData } from '@util/util';
 import InfoItem from '@common/info-item/info-item';

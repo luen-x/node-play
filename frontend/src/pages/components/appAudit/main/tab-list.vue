@@ -71,26 +71,26 @@ export default {
 	},
 	methods: {
 		async loadData(currentPage, pageSize){
-			const query = filterQuery({ ...this.query, [this.tabKey]: this.curTab, currentPage, pageSize });
-			this.$router.replace({ query });
-			return this.$getList('APP_AUDIT_LIST_GET', query).then(res => {
+			// const query = filterQuery({ ...this.query, [this.tabKey]: this.curTab, currentPage, pageSize });
+			// this.$router.replace({ query });
+			// return this.$getList('APP_AUDIT_LIST_GET', query).then(res => {
 
-				res.data.forEach(i => {
-					i.auditStatusName = map.auditStatus[i.status];
-					i.applyTypeName = map.applyType[i.applyType];
-				});
-				console.log(res);
-				return res;
-			});
-			// await new Promise(r => setTimeout(r, 1000));
-			// const data = [];
-			// for (let i = 0; i < pageSize; i++){
-			// 	data.push({ name: 'aa' + currentPage + pageSize, address: 'address' +  currentPage + pageSize, zip: '666' });
-			// }
-			// return { 
-			// 	pager: { currentPage: currentPage, pageSize: pageSize, total: 100 }, 
-			// 	data 
-			// };
+			// 	res.data.forEach(i => {
+			// 		i.auditStatusName = map.auditStatus[i.status];
+			// 		i.applyTypeName = map.applyType[i.applyType];
+			// 	});
+			// 	console.log(res);
+			// 	return res;
+			// });
+			await new Promise(r => setTimeout(r, 1000));
+			const data = [];
+			for (let i = 0; i < pageSize; i++){
+				data.push({ name: 'aa' + currentPage + pageSize, address: 'address' +  currentPage + pageSize, zip: '666' });
+			}
+			return { 
+				pager: { currentPage: currentPage, pageSize: pageSize, total: 100 }, 
+				data 
+			};
 		},
 		search(){
 			this.tabs.forEach((tab, index) => {

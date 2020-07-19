@@ -1,6 +1,6 @@
 import { PRE_ROUTER_URL } from '../constants/constants';
 import Layout from "@components/layout/layout";
-import Login from "@components/login/login";
+// import Login from "@components/login/login";
 
 import appAuditConfig  from '../containers/appAudit/app';
 import appListConfig  from '../containers/appList/app';
@@ -12,7 +12,7 @@ const routeConfig = {
 	routes: [
 		{
 			path: "/login",
-			component: Login
+			component: () => import('../components/login/login')
 		},
 		{
 			path: '/',

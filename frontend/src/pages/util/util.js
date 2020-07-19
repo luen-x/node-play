@@ -1,6 +1,6 @@
 export * from '@lawrence666/le-util';
 import { RegEx } from '@lawrence666/le-util';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 RegEx.set({
 	telOrMobile: {
@@ -28,6 +28,6 @@ export const setData = (to, from) => {
 	});
 };
 export const formatTime = (time, format = 'YYYY-MM-DD HH:mm:ss') => {
-	return (time && moment(time).format(format)) || '';
+	return (time && dayjs(time).format(format)) || '';
 };
 
