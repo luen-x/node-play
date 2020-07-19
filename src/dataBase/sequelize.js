@@ -41,6 +41,7 @@ global.Op = Sequelize.Op;
 
 var sequelize = new Sequelize(config.database, config.user, config.password, {
 	host: config.host,
+	port: config.port,
 	dialect: "mysql",
 	pool: {
 		max: 5, 
@@ -53,6 +54,7 @@ var sequelize = new Sequelize(config.database, config.user, config.password, {
 		timestamps: false,
 	},
 });
+sequelize.authenticate();
 
 global.$seq = sequelize; // 存储全局sequelize实例
 module.exports = sequelize;

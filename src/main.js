@@ -1,6 +1,8 @@
 global.__projectPath = process.cwd();
 const Koa = require('koa');
 const router = require('koa-router')();
+
+const { historyApiFallback } = require('koa2-connect-history-api-fallback');
 const bodyParser = require('koa-bodyparser');
 const crossOrigin = require('./middleware/crossOrigin');
 const catchException = require('./middleware/catchException');
@@ -19,13 +21,13 @@ controllers.forEach(con=>{
 }); 
 app.use(router.routes()).use(router.allowedMethods());
 // 以上为官方推荐方式，allowedMethods用在routes之后，作用是根据ctx.status设置response header.
-
-app.use(require('koa-static')('./static'));
+app.use(historyApiFallback({ whiteList: ['/api'] }));
+app.use(require('koa-static')('./frontend/dist'));
 
 app.listen(80, err => {
 	if (err) { throw err; }
     
-	console.log('http://localhost:3000/index.html');
+	console.log('http://localhost:80/index.html');
 });
 // wsService.start(); 
 

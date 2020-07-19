@@ -22,7 +22,11 @@ paths.forEach(path => {
 	const con = require(path); 
 	if (con.basePath) {
 		con.controller.forEach(it=>{
-			it.path = con.basePath+it.path;
+			it.path = '/api'+con.basePath+it.path;
+		});
+	} else {
+		con.controller.forEach(it=>{
+			it.path = '/api'+it.path;
 		});
 	}
 	controllers.push(...con.controller.map(c=>new Controller(c)));

@@ -1,0 +1,84 @@
+:focus{
+	outline: none;
+}
+// element-reset
+.el-drawer {
+	.el-drawer__header {
+		font-size: 14px;
+		color: $black-12;
+		background-color: $black-f9;
+		line-height: 20px;
+		padding: 15px 20px;
+	}
+}
+.el-drawer__wrapper {
+    pointer-events: none;
+    .el-drawer__container {
+        pointer-events: none;
+        .el-drawer {
+            pointer-events: auto;
+        }
+    }
+}
+.el-button--primary {
+	background: linear-gradient(to right,#336dff,#6691ff);
+	color: white;
+	border: none;
+	border-radius: 4px;
+	&:hover,&:hover,&:focus {
+		background: linear-gradient(to right,#2261ff,#5484ff);
+	}
+	&.is-disabled {
+		color: #666666;
+		background: #4A4A4A;
+		&:hover,&:focus,&:hover {
+			color: #666666;
+			background: #4A4A4A;
+		}
+	}
+}
+.el-button--ghost {
+	border: 1px solid #6691FF;
+	border-radius: 4px;
+	color: #6691FF;
+	background: rgba(0,0,0,0);
+	&:hover,&:active,&:focus {
+		border: 1px solid #336DFF;
+		color: #336DFF;
+		background: rgba(0,0,0,0);
+	}
+	&.is-disabled {
+		color: #666666;
+		background: #4A4A4A;
+		border: none;
+		&:hover,&:focus,&:hover {
+			color: #666666;
+			background: #4A4A4A;
+		}
+	}
+}
+.el-dialog {
+	max-width: 480px;
+	border-radius: 8px;
+	.el-dialog__header {
+		border-radius: 8px 8px 0 0 ;
+		background-color: $black-f9;
+		color: $black-12;
+		padding: 15px 20px;
+		
+		.el-dialog__title {
+			font-size: 14px;
+		}
+		.el-dialog__headerbtn .el-dialog__close {
+			color: $black-6;
+		}
+	}
+	.el-dialog__body {
+		color: $black-3a;
+		padding: 24px;
+		.el-dialog__close {
+			font-size: 16px;
+		}
+	}
+}
+

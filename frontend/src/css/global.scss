@@ -1,0 +1,17 @@
+
+.g-operation {
+    color: $blue-mid;
+    cursor: pointer;
+}
+.g-fw-w {
+    flex-wrap: wrap;
+}
+
+.g-hide-required.el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label:before {
+    content: '';
+}
+.g-pointer {
+    cursor: pointer;
+}
+
+

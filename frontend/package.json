@@ -1,0 +1,46 @@
+{
+  "name": "mms",
+  "version": "1.0.0",
+  "description": "mms",
+  "dependencies": {
+    "@lawrence666/le-sass": "^1.0.6",
+    "@lawrence666/le-util": "^1.0.4",
+    "axios": "^0.19.2",
+    "core-js": "^3.6.4",
+    "element-ui": "^2.13.2",
+    "moment": "^2.26.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.3.2",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-eslint": "~4.3.0",
+    "@vue/cli-plugin-router": "~4.3.0",
+    "@vue/cli-plugin-vuex": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "fs-extra": "^9.0.0",
+    "inquirer": "^7.1.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.19.1",
+    "recast": "^0.19.1",
+    "sass-loader": "^8.0.2",
+    "shelljs": "^0.8.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "scripts": {
+    "add": "node ./config/add-route/add-route.js && npm run lint-fix",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lint-fix": "npm run lint --fix",
+    "remove": "node ./config/remove-route/remove-route.js && npm run lint-fix",
+    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve"
+  }
+}
