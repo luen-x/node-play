@@ -23,7 +23,7 @@
     "lodash": "^4.17.15",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.3",
-    "ws": "^7.1.2"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "assemblyscript": "^0.8.1",
